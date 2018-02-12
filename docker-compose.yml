@@ -1,0 +1,12 @@
+version: '3.0'
+services:
+  app:
+    build: .
+    working_dir: /app
+    volumes:
+      - ./:/app:cached
+      - home:/root
+    environment:
+      PATH: /usr/src/streem/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+volumes:
+  home:

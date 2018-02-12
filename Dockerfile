@@ -2,23 +2,14 @@
 #       Streem Dockerfile.       #
 # https://github.com/matz/streem #
 ##################################
-FROM alpine
+FROM ubuntu
+
+RUN apt-get update && apt-get install build-essential -y
+
+ENV PATH="/usr/src/streem/bin:${PATH}"
 
 COPY . /usr/src/streem
 
-RUN \
-    sed -i -e 's/^CDEFS.*/\0 -DNO_QSORT_R/g' /usr/src/streem/src/Makefile && \
-    apk update && \
-    apk add \
-      musl-dev gcc flex \
-      bison gc-dev make \
-    && \
-    cd /usr/src/streem && \
-    make && \
-    apk del --purge \
-        musl-dev gcc flex \
-        bison gc-dev make \
-    && \
-    rm -rf /var/cache/apk/*
+RUN cd /usr/src/streem && make
 
 CMD /usr/src/streem/bin/streem
