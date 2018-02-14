@@ -1,0 +1,2 @@
+x = "パタトクカシーー"
+zip(seq(), x.chars) | filter {e -> e(0) % 2 == 1 } | map {e -> e(1) } | reduce {acc, c -> acc + c} | stdout
