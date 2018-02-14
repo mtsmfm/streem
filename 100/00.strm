@@ -1,0 +1,1 @@
+reverse("stressed".chars) | reduce {acc, c -> acc + c} | stdout
